@@ -1,0 +1,20 @@
+# Rime schema custom settings
+# encoding: utf-8
+
+patch:
+  # 使用全拼，并保留 7/8/9/0 声调筛选。
+  speller/algebra:
+    __patch:
+      - wanxiang_algebra:/base/全拼
+
+  menu/page_size: 6
+
+  # 自动学习开启；不启用主动上下文预测。
+  translator/enable_user_dict: true
+  translator/contextual_suggestions: false
+
+  # 使用独立个人短语文件，避免修改上游 custom_phrase.txt。
+  custom_phrase/user_dict: personal_phrase
+
+  # 关闭万象附加简码库；拼音补全仍可能产生短编码候选。
+  switches/@8/reset: 0

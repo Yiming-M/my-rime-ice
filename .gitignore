@@ -1,0 +1,8 @@
+.DS_Store
+build/
+sync/
+*.userdb/
+installation.yaml
+user.yaml
+*.gram
+*.gram.*
