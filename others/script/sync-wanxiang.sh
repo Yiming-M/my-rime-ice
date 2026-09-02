@@ -8,6 +8,7 @@ model_name="wanxiang-lts-zh-hans.gram"
 model_url="https://cnb.cool/amzxyz/rime-wanxiang/-/releases/download/model/${model_name}"
 model_path="${repo_dir}/${model_name}"
 deployer="/Library/Input Methods/Squirrel.app/Contents/MacOS/rime_deployer"
+squirrel="/Library/Input Methods/Squirrel.app/Contents/MacOS/Squirrel"
 shared_dir="/Library/Input Methods/Squirrel.app/Contents/SharedSupport"
 
 cd "${repo_dir}"
@@ -42,11 +43,12 @@ if [[ "${1:-}" == "--refresh-model" || ! -s "${model_path}" ]]; then
   trap - EXIT
 fi
 
-if [[ ! -x "${deployer}" ]]; then
-  print -u2 "错误：未找到鼠须管部署工具：${deployer}"
+if [[ ! -x "${deployer}" || ! -x "${squirrel}" ]]; then
+  print -u2 "错误：未找到鼠须管部署或重载工具。"
   exit 1
 fi
 
 "${deployer}" --build "${repo_dir}" "${shared_dir}" "${repo_dir}/build"
+"${squirrel}" --reload
 
 print "万象已同步并部署完成。检查无误后可运行：git push"
